@@ -1,0 +1,20 @@
+<div class="position-fixed bg-light">
+    <div class="container cart mb-2">
+        <h2 class="border-bottom text-center">Your Cart</h2>
+        <p><span *ngIf="calcTotal()==0">Your cart looks a little empty!</span></p>
+        <ul class="list-group">
+            <li class="list-group-item " *ngFor="let p of cartList$ | async; let i = index">
+                {{p.name}}: {{p.quantity}} <button type="button" class="btn btn-danger btn-sm"
+                    (click)="removeItem(i, p)">remove</button>
+
+            </li>
+        </ul>
+        <div>
+
+            <p class="mt-1 text-center"> Total to pay:  <span
+                    class="badge rounded-pill text-bg-info">{{calcTotal() | currency}}</span></p>
+
+            <button class="btn btn-secondary mb-1"><a class="orderLink" href="#">Order Now</a></button>
+        </div>
+    </div>
+</div>

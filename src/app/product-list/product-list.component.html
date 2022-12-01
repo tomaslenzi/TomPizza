@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-9 main ">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" *ngFor=" let product of products" [ngClass]="{'clearance': product.clearance}">
+        <div class="card h-100">
+
+          <img [src]="product.image" class="bd-placeholder-img card-img-top" alt="{{product.name}}">
+
+          <div class="card-body text-center">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.description}}</p>
+            <p class="card-text">{{product.price | currency}}</p>
+            <p class="card-text"><span class="badge text-bg-warning" *ngIf="product.stock==0">OUT OF STOCK</span></p>
+            <div class="d-grid gap-2"> {{product.stock}}
+              <app-input-integer [(quantity)]="product.quantity" [max]="product.stock" (maxReached)="maxReached($event)"
+                *ngIf="product.stock"></app-input-integer>
+              <button class="btn btn-success d-grid" (click)="addToCart(product)">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 ">
+    <app-cart></app-cart>
+  </div>
+
+</div>
